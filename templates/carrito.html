@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h3>Carrito de compras</h3>
+
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Inicializar el total -->
+            {% set total = 0 %}
+
+            <!-- Iterar sobre los items en el carrito -->
+            {% for id, item in carrito.items() %}
+
+                {% set subtotal = item.precio * item.cantidad %}
+                {% set total = total + subtotal %}
+
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ subtotal }}</td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3"><b>Total</b></td>
+                <td><b>{{ total }}</b></td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    <a href="/" class="btn btn-secondary">
+        Seguir comprando
+    </a>
+
+    <a href="/checkout" class="btn btn-primary">
+        Comprar
+    </a>
+
+</div>
+
+{% endblock %}
