@@ -19,13 +19,13 @@
 
         <tbody>
             <!-- Inicializar el total -->
-            {% set total = 0 %}
+            {% set ns = namespace(total = 0) %}
 
             <!-- Iterar sobre los items en el carrito -->
             {% for id, item in carrito.items() %}
 
                 {% set subtotal = item.precio * item.cantidad %}
-                {% set total = total + subtotal %}
+                {% set ns.total = ns.total + subtotal %}
 
                 <tr>
                     <td>{{ item.nombre }}</td>
@@ -41,7 +41,7 @@
         <tfoot>
             <tr>
                 <td colspan="3"><b>Total</b></td>
-                <td><b>{{ total }}</b></td>
+                <td><b>{{ ns.total }}</b></td>
             </tr>
         </tfoot>
 
