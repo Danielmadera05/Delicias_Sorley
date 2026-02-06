@@ -5,6 +5,7 @@ from extensions import db
 from controllers.fritosController import fritos_bp
 from controllers.clienteController import auth_bp
 from controllers.carritoController import cart_bp
+from controllers.pedidoController import pedido_bp
 
 # Initialize Flask application
 app = Flask(__name__)
@@ -17,6 +18,7 @@ db.init_app(app)
 app.register_blueprint(fritos_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(cart_bp)
+app.register_blueprint(pedido_bp)
 
 # Set a secret key for session management
 app.secret_key = "clave_super_secreta"

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3>Mis compras</h3>
+
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for p in pedidos %}
+            <tr>
+                <td>{{ p.ped_id }}</td>
+                <td>{{ p.ped_fecha }}</td>
+                <td>${{ "%.0f"|format(p.ped_total) }}</td>
+                <td>{{ p.ped_estado }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
