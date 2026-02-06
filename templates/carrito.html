@@ -31,7 +31,13 @@
                 <tr>
                     <td>{{ item.nombre }}</td>
                     <td>{{ item.precio }}</td>
-                    <td>{{ item.cantidad }}</td>
+                    <td class="d-flex gap-2">
+                        <a href="/decrease/{{ id }}" class="btn btn-outline-secondary btn-sm">-</a>
+
+                        <span>{{ item.cantidad }}</span>
+
+                        <a href="/increase/{{ id }}" class="btn btn-outline-secondary btn-sm">+</a>
+                    </td>
                     <td>{{ subtotal }}</td>
                     <td>
                         <a href="/remove_from_cart/{{ id }}" 

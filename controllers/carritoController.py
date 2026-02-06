@@ -47,3 +47,24 @@ def remove_from_cart(producto_id):
         session["cart"].pop(str(producto_id), None)
         session.modified = True
     return redirect("/cart")
+
+# Increase product quantity in cart
+@cart_bp.route("/increase/<int:producto_id>")
+def increase(producto_id):
+    if "cart" in session:
+        if str(producto_id) in session["cart"]:
+            session["cart"][str(producto_id)]["cantidad"] += 1
+            session.modified = True
+    return redirect("/cart")
+
+# Decrease product quantity in cart
+@cart_bp.route("/decrease/<int:producto_id>")
+def decrease(producto_id):
+    if "cart" in session:
+        if str(producto_id) in session["cart"]:
+            if session["cart"][str(producto_id)]["cantidad"] > 1:
+                session["cart"][str(producto_id)]["cantidad"] -= 1
+            else:
+                session["cart"].pop(str(producto_id), None)
+            session.modified = True
+    return redirect("/cart")
