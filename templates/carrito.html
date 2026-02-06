@@ -14,6 +14,7 @@
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -32,6 +33,12 @@
                     <td>{{ item.precio }}</td>
                     <td>{{ item.cantidad }}</td>
                     <td>{{ subtotal }}</td>
+                    <td>
+                        <a href="/remove_from_cart/{{ id }}" 
+                        class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+                    </td>
                 </tr>
 
             {% endfor %}

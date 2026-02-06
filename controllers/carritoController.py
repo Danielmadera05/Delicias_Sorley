@@ -39,3 +39,11 @@ def add_cart(id):
 def cart():
     carrito = session.get("cart", {})
     return render_template("carrito.html", carrito=carrito)
+
+#Remove product from cart
+@cart_bp.route("/remove_from_cart/<int:producto_id>")
+def remove_from_cart(producto_id):
+    if "cart" in session:
+        session["cart"].pop(str(producto_id), None)
+        session.modified = True
+    return redirect("/cart")
