@@ -7,6 +7,7 @@ class Pedido(db.Model):
     cli_id = db.Column(db.Integer, db.ForeignKey("cliente.cli_id"))
     ped_total = db.Column(db.Float(10,2))
     ped_fecha = db.Column(db.DateTime, default=db.func.current_timestamp())
+    ped_estado = db.Column(db.String(50))
 
 class PedidoDetalle(db.Model):
     __tablename__ = "pedido_detalle"

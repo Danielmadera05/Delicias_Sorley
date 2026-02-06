@@ -90,7 +90,8 @@ def checkout():
 
     pedido = Pedido(
         cli_id=session["cliente_id"],
-        ped_total=total
+        ped_total=total,
+        ped_estado="Solicitado"
     )
     db.session.add(pedido)
     db.session.commit()
@@ -108,5 +109,5 @@ def checkout():
     db.session.commit()
 
     session.pop("cart")
-
+    flash("Puede revisar sus pedidos en la sección de MIS COMPRAS 🧾", "success") # Notificacion por mensaje
     return render_template("detalle_pedido.html", pedido_id=pedido.ped_id)
