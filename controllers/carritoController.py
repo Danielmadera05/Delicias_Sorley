@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, flash
 from models.fritosModels import Fritos
+from models.pedidoModels import Pedido, PedidoDetalle
+from extensions import db
 
 cart_bp = Blueprint("carrito", __name__)
 
@@ -68,3 +70,43 @@ def decrease(producto_id):
                 session["cart"].pop(str(producto_id), None)
             session.modified = True
     return redirect("/cart")
+
+# Checkout and create order
+@cart_bp.route("/checkout")
+def checkout():
+
+    # Si el cliente no ha iniciado sesión, redirigir al login
+    if "cliente_id" not in session:
+        return redirect("/login")
+
+    # Si el carrito está vacío, redirigir al carrito
+    if "cart" not in session or len(session["cart"]) == 0:
+        return redirect("/cart")
+
+    total = 0
+
+    for item in session["cart"].values():
+        total += item["precio"] * item["cantidad"]
+
+    pedido = Pedido(
+        cli_id=session["cliente_id"],
+        ped_total=total
+    )
+    db.session.add(pedido)
+    db.session.commit()
+
+    # Crear detalles del pedido
+    for id, item in session["cart"].items():
+        detalle = PedidoDetalle(
+            ped_id=pedido.ped_id,
+            fri_id=id,
+            cantidad=item["cantidad"],
+            precio=item["precio"]
+        )
+        db.session.add(detalle)
+
+    db.session.commit()
+
+    session.pop("cart")
+
+    return render_template("detalle_pedido.html", pedido_id=pedido.ped_id)
