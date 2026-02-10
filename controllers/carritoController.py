@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, flash
 from models.fritosModels import Fritos
-from models.pedidoModels import Pedido, PedidoDetalle
+from models.pedidoModels import Pedido
+from models.detalleModels import PedidoDetalle
 from extensions import db
 
 cart_bp = Blueprint("carrito", __name__)
@@ -110,4 +111,4 @@ def checkout():
 
     session.pop("cart")
     flash("Puede revisar sus pedidos en la sección de MIS COMPRAS 🧾", "success") # Notificacion por mensaje
-    return render_template("detalle_pedido.html", pedido_id=pedido.ped_id)
+    return render_template("confirmacion.html", pedido_id=pedido.ped_id)
