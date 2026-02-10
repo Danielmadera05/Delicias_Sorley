@@ -15,7 +15,7 @@
 
                 <div class="card-body text-center">
 
-                    <img src="{{ url_for('static', filename='uploads/' + cliente.cli_foto) }}"
+                    <img src="{{ url_for('static', filename='uploads/' ~ (cliente.cli_foto or 'default.png')) }}"
                          width="120"
                          height="120"
                          class="rounded-circle mb-3">

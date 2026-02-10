@@ -33,7 +33,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false">
 
-                <img src="{{ url_for('static', filename='uploads/' + session.get('cliente_foto','default.png')) }}"
+                <img src="{{ url_for('static', filename='uploads/' ~ session.get('cliente_foto','default.png')) }}"
                     width="35" height="35"
                     class="rounded-circle me-2">
 

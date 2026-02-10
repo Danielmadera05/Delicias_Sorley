@@ -55,7 +55,7 @@ def login():
         if cliente and check_password_hash(cliente.cli_password, password): # Verificar contraseña
             session["cliente_id"] = cliente.cli_id
             session["cliente_nombre"] = cliente.cli_nombre
-            session["cliente_foto"] = cliente.cli_foto
+            session["cliente_foto"] = cliente.cli_foto or "default.png"
             return redirect("/") # Redirigir a la página principal después del login exitoso
 
     return render_template("login.html")
